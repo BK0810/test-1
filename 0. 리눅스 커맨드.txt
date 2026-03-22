@@ -90,11 +90,11 @@ git diff        변경사항 확인 (작업트리/스테이지, 스테이지/저
     - 경로: temp/
     - 확장자: swp
 
-
 git branch             브랜치 리스트 확인(*표시가 현재 작업중인 브랜치)
 git branch -M main     브랜치의 이름을 'main'으로 변경
 git branch 브랜치명     새로운 브랜치 생성
 git brnach -d 브랜치명  브랜치 삭제
+
 git switch 브랜치명     현재 브랜치에서 다른 브랜치로 전환
 git merge 브랜치명      다른 브랜치를 가져와 현재 브랜치에 병합
 
@@ -127,10 +127,47 @@ git push
 git pull
 
 git fetch                       원격저장소의 최신커밋 정보만 가져옴(로그에만 반영되고, 파일은 반영 안됨)
+git merge origin/main           원격저장소의 커밋을 내 지역저장소로 합침
+git pull origin main            pull = fetch + merge (최신 정보를 가져와서 합침)
 
 git diff 지역저장소 원격저장소    지역저장소의 최신커밋과 원격저장소의 최신커밋의 차이      
 git diff HEAD origin/main
 git diff main origin/main
 
-git merge origin/main           원격저장소의 커밋을 내 지역저장소로 합침
-git pull origin main            pull = fetch + merge (최신 정보를 가져와서 합침)
+
+<협업과 브랜치>
+- 원격저장소 생성
+- 공동 작업자 추가
+- 프로젝트 생성
+- TO-DO 리스트 작성 & 역할부여(Convert to issue) & 역할별 원격저장소 내 브랜치 생성
+- 브랜치별 커밋 & 푸시
+- PR(Pull Request): 깃허브 main 브랜치에 병합 요청
+- 코드 리뷰
+- 코드 병합
+
+git clone 원격저장소 주소
+    git clone https://github.com/BK0810/project.git
+
+    git fetch origin
+    git checkout plan2
+
+git switch 브랜치명
+    git switch plan
+
+git add plan-1.txt
+git commit -m
+git push                            원격저장소 내 plan 브랜치에 commit 반영됨
+    git push -u origin 브랜치명          지역저장소에서 새로 만든 브랜치인 경우 최초 push 시
+
+PR 요청                              원격저장소의 plan 브랜치 커밋을 main 브랜치에 merge 반영 요청
+    깃허브 내 plan 브랜치
+    Compare & Pull request
+PR 검토 & 브랜치 병합 (리뷰어/팀장)    원격저장소의 plan 브랜치 커밋을 main 브랜치에 merge 반영
+    Pull requests 탭
+    merge pull request
+    confirm merge
+    Pull request successfully merged and closed
+    브랜치 목적달성 시 Delete
+
+
+
