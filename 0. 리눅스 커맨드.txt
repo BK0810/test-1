@@ -1,0 +1,136 @@
+<리눅스 단축키>
+q           독서모드 종료
+ESC         명령준비
+엔터        독서모드 한줄씩 이동
+스페이스    독서모드 한단락씩 이동
+:wq         Write(저장), Quite(종료)
+
+
+<리눅스 명령어>
+clear     터미널 내용 지우기
+exit      터미널 종료하기  
+
+pwd       현재 경로 (print working directory)
+ls        현재 디렉터리 내에 있는 파일/디렉터리 확인 (list, /붙은게 디렉터리)
+ls -l     현재 디렉터리 내에 있는 파일/디렉터리 상세정보 (long format)
+ls -t     현재 디렉터리 내에 있는 파일/디렉터리 작성 시간순(내림차순) 표시
+ls -lt    -l 옵션과 -t 옵션을 함께 적용
+ls -la    -l 옵션과 -a 옵션을 함께 적용 (숨긴 파일이나 디렉터리까지 표시)
+
+.   현재 작업중인 디렉터리
+..  현재 작업중인 디렉터리 상위
+~   홈 디렉터리
+
+cd ..           상위 디렉터리로 이동 (change directory)
+cd 디렉터리명     하위 디렉터리로 이동 
+cd ~             홈 디렉터리로 이동
+
+mkdir 디렉터리명    현재 디렉터리 안에 하위 디렉터리 생성 (make directory)
+rm -r 디렉터리명    현재 디렉터리 안에 있는 하위 디렉터리 삭제 (remove)
+
+
+<Git 명령어>
+git config --global user.name "사용자명"
+git config --global user.email "사용자이메일"
+git config --global init.defaultBranch main
+
+git init                해당 디렉터리에 저장소를 만들기 위해 초기화하는 것
+git branch -M main      브랜치의 이름을 'main'으로 변경
+
+- 작업트리 (working tree)
+      => add:  작업트리 -> 스테이지
+- 스테이지 (stage):  버전으로 만들 파일이 대기하는 곳. Staging Area
+      => commit:  스테이지 -> 저장소 (버전생성)
+- 저장소 (repository):  스테이지에서 대기하고 있던 파일들을 버전으로 만들어 저장하는 곳
+
+
+git status                  깃의 상태 확인
+    - On branch main        현재 브랜치
+    - No commits yet        커밋한 파일이 아직 없음
+    - Untracked files       한번도 커밋하지 않은 파일 (수정 내역을 추적하지 않음)
+    - nothing to commit     현재 커밋할 파일이 없음 (버전으로 만들 파일 없음)
+    - working tree clean    작업트리에 수정사항 없음
+    - Changes not staged for commit     작업트리에 변경된 내용은 있으나 스테이징되지 않음 (변경된 파일이 아직 스테이지에 올라가지 않음)
+    - no changes added to commit        현재 스테이징된 파일 없음
+    - untracked > unmodified > modified > staged
+
+git add '파일명'                    스테이지에 변경 사항 올리기 (스테이징)
+git add .                           작업트리에 있는 모든 수정 파일을 한번에 스테이징
+    - Changes to be committed       앞으로 커밋할 파일
+    - new file (처음 커밋하는 파일) / modified (수정하는 파일)
+
+git commit -m '메시지'       스테이징한 파일 커밋 (버전 만듬, m 메시지옵션)
+git commit -am '메시지'      스테이징과 커밋 한번에 처리 (all 옵션 + message 옵션)
+    - 1 file changed, 50 insertions(+)      파일 1개가 변경되었고, 50 Line이 추가됨
+
+
+git restore '파일명'                작업트리에서 수정한 파일 되돌리기 (작업트리 수정취소)
+git restore --staged                스테이징 되돌리기 (스테이징 취소)
+git restore --staged '파일명'        스테이징 되돌리기 (스테이징 취소)
+
+git reset HEAD^             최신 커밋 되돌리기 (최신커밋 취소/스테이징 취소/작업트리에만 남음)
+git reset --hard '해시'     특정 커밋으로 되돌리기 (이후 커밋은 취소/삭제)
+git revert '해시'           커밋 변경이력 취소 (취소하는 버전을 삭제하지 않고 남겨둠)
+
+git log             저장소에 저장된 버전 확인 (커밋 로그)
+git log --stat      커밋과 관련된 파일까지 확인
+    - 커밋해시 / 만든사람 / 만든시각 / 메시지
+    - (HEAD -> main) 가장 최신버전
+git log --oneline               한 줄에 한 커밋씩 보여줌
+git log --oneline --branches    브랜치별 최신 커밋을 한줄로 보여줌
+git log --oneline --branches --graph    브랜치와 커밋의 관계를 그래프 형태로 표시
+git log 브랜치명1..브랜치명2        브랜치1에는 없고, 2에만 있는 커밋을 보여줌
+
+git diff        변경사항 확인 (작업트리/스테이지, 스테이지/저장소)
+    - -     삭제된 내용
+    - +     추가된 내용
+
+.gitignore      버전관리를 하지 않을 파일/경로/확장자 목록을 지정한 파일
+    - 파일: mynote.txt
+    - 경로: temp/
+    - 확장자: swp
+
+
+git branch             브랜치 리스트 확인(*표시가 현재 작업중인 브랜치)
+git branch -M main     브랜치의 이름을 'main'으로 변경
+git branch 브랜치명     새로운 브랜치 생성
+git brnach -d 브랜치명  브랜치 삭제
+git switch 브랜치명     현재 브랜치에서 다른 브랜치로 전환
+git merge 브랜치명      다른 브랜치를 가져와 현재 브랜치에 병합
+
+
+<git hub 원격저장소 연동>
+git remote add origin 원격저장소 주소(HTTPS)        원격저장소 주소(깃허브)를 origin 이라는 이름으로 추가
+git remote add origin https://github.com/bk0810/test-1.git
+
+git remote -v               원격저장소 연결 확인
+
+git commit -am "메시지"     수정/삭제된 파일만(기존에 커밋된 적이 있는 파일) 스테이징/커밋함(add+commit)
+git add -A                  수정/삭제/새로 생성된 파일까지 전부 스테이징 영역에 올림
+
+git push -u origin main     지역저장소의 커밋을 원격저장소(origin)의 main 브랜치로 푸시(최초연결시 -u 옵션)
+git push                    원격저장소와 최초연결(인증)을 한 이후에는 간단하게 push 가능
+
+git pull origin main        원격저장소(origin)의 main브랜치 커밋을 지역저장소로 가져옴
+git pull                    내 현재 브랜치와 연결된 원격브랜치에서 알아서 가져와줘
+
+git log                     (HEAD -> main)  지역 저장소의 최종 커밋
+                            (origin/main)   원격 저장소의 최종 커밋
+
+
+<서로 다른 컴퓨터에서 원격저장소 함께 사용하기>
+git clone 원격저장소 주소(HTTPS)                원격저장소에 있는 프로젝트 전체를 로컬PC로 가져와 새로운 로컬저장소를 만듬
+                                                clone을 하면 git remote add origin <URL> 을 하지 않아도 자동으로 원격저장소가 origin 으로 등록됨
+git clone https://github.com/BK0810/test-1.git
+
+git push
+git pull
+
+git fetch                       원격저장소의 최신커밋 정보만 가져옴(로그에만 반영되고, 파일은 반영 안됨)
+
+git diff 지역저장소 원격저장소    지역저장소의 최신커밋과 원격저장소의 최신커밋의 차이      
+git diff HEAD origin/main
+git diff main origin/main
+
+git merge origin/main           원격저장소의 커밋을 내 지역저장소로 합침
+git pull origin main            pull = fetch + merge (최신 정보를 가져와서 합침)
